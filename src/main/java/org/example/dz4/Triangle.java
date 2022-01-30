@@ -34,7 +34,7 @@ public class Triangle {
         return a > 0 && b > 0 && c > 0;
     }
 
-    /*public int countPerimeter() {
+    public int countPerimeter() {
         if (!hasPositiveSides()) {
             throw new IllegalArgumentException("The sides must be positive");
         }
@@ -42,7 +42,7 @@ public class Triangle {
             throw new IllegalArgumentException("The triangle must be valid");
         }
         return a + b + c;
-    }*/
+    }
 
     public int countSquare() {
         if (!hasPositiveSides()) {
@@ -52,7 +52,17 @@ public class Triangle {
             throw new IllegalArgumentException("The triangle must be valid");
         }
         return (int) sqrt(((a+b+c)/2)*((a+b+c)/2-a)*((a+b+c)/2-b)*((a+b+c)/2-c));
+    }
 
+    public void paint(Colour colour) {
+        if (this.colour == colour) {
+            throw new IllegalArgumentException("The new colour must be not equal to old colour");
+        }
+        this.setColour(colour);
+    }
+
+    public void paint(String colour) {
+        this.paint(Colour.valueOf(colour));
     }
 
 }

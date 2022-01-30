@@ -1,20 +1,32 @@
 package org.example.dz4;
 
-import org.example.dz4.Triangle;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 
+import org.example.dz4.providers.InvalidTriangleProvider;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.*;
+import org.junit.platform.commons.logging.LoggerFactory;
+
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeFalse;
 
 @DisplayName("Треугольник")
 public class TriangleTest {
+
+    //private static final Logger logger = LoggerFactory.getLogger(TriangleTest.class);
+
+    void setUp() {
+//        logger.trace("BeforeEach trace");
+//        logger.debug("BeforeEach debug");
+//        logger.info("BeforeEach info");
+//        logger.warn("BeforeEach warn");
+//        logger.error("BeforeEach error");
+    }
+
+
 
     /*@Test
     @DisplayName("Периметр треугольника: прямоугольный треугольник")
@@ -49,12 +61,12 @@ public class TriangleTest {
                 Arguments.of(new Triangle(12, 16, 20), 96));
     }
 
-    /*@ParameterizedTest(name = "Периметр треугольника {0} равен {1}")
+    @ParameterizedTest(name = "Периметр треугольника {0} равен {1}")
     @MethodSource("triangles")
     public void countPerimeterTriangleTest(Triangle triangle, int expectedPerimeter) {
         int perimeter = triangle.countPerimeter(); //Act
         assertEquals(expectedPerimeter, perimeter); //Assert
-    }*/
+    }
 
     @ParameterizedTest(name = "Площадь треугольника {0} равна {1}")
     @MethodSource("triangles")
@@ -63,5 +75,55 @@ public class TriangleTest {
         assertEquals(expectedSquare, square); //Assert
     }
 
+    @ParameterizedTest
+    @ArgumentsSource(InvalidTriangleProvider.class)
+    public void perimeterInvalidTriangleNegativeTestTest(Triangle triangle) {
+        IllegalArgumentException illegalArgumentException = assertThrows(IllegalArgumentException.class, triangle::countPerimeter);
+        assertEquals("The triangle must be valid", illegalArgumentException.getMessage());
+    }
+
+
+    @ParameterizedTest(name = "Перекрашивание треугольника из {0} в {1}")
+    @CsvSource({"RED, GREEN", "GREEN, BLUE"})
+    public void paintTriangleWithCsvSourceTest(Triangle.Colour colourBefore, Triangle.Colour colourAfter) {
+        Triangle triangle = new Triangle(3, 3, 3, colourBefore); //arrange
+        triangle.paint(colourAfter);
+        assertEquals(colourAfter, triangle.getColour()); //Assert
+    }
+
+    @Nested
+    class PaintTriangleTest {
+        Triangle triangle;
+
+        @BeforeEach
+        void setUp() {
+            triangle = new Triangle(3, 3, 3);
+        }
+
+        @ParameterizedTest(name = "Перекрашивание треугольника в {0}")
+        @EnumSource(Triangle.Colour.class)
+        public void paintTriangleTest(Triangle.Colour colour) {
+            //Triangle triangle = new Triangle(3, 3, 3);
+            assumeFalse(colour.equals(triangle.getColour()));
+            triangle.paint(colour);
+            assertEquals(colour, triangle.getColour()); //Assert
+        }
+
+        @ParameterizedTest(name = "Перекрашивание треугольника в {0}")
+        @ValueSource(strings = {"RED", "GREEN"})
+        public void paintTriangleWithValueSourceTest(String colour) {
+            //Triangle triangle = new Triangle(3, 3, 3);
+            triangle.paint(colour);
+            assertEquals(Triangle.Colour.valueOf(colour), triangle.getColour()); //Assert
+        }
+    }
 }
+
+
+
+
+
+
+
+
 
