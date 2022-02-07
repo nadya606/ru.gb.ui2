@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class FiltrLamp extends BaseTest {
+public class FiltrLampTest extends BaseTest {
     @Test
     void filterPriceTest() {
         webDriver.get("https://gauss-online.ru/gauss/2859/");

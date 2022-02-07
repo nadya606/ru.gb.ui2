@@ -1,5 +1,6 @@
 package dz7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,34 +17,40 @@ public class CartPage extends BasePage {
         super(webDriver);
     }
 
+    @Step("Проверка наличия товара в корзине")
     public CartPage checkCart() {
         List<WebElement> productsInCart = webDriver.findElements(By.xpath("//div[@class='spinner nuclear']//input[@class='qty']"));
         assertThat(productsInCart).hasSize(1);
         return this;
     }
 
+    @Step("Проверка нескольких товаров одного артикля в корзине")
     public CartPage checkSumCart() {
         List<WebElement> productsInCart = webDriver.findElements(By.xpath("//div[@class='spinner nuclear']//input[@class='qty']"));
         assertThat(productsInCart).hasSize(1);
         return this;
     }
 
+    @Step("Проверка нескольких товаров разных артиклей в корзине")
     public CartPage checkSum2articleCart() {
         List<WebElement> productsInCart = webDriver.findElements(By.xpath("//div[@class='spinner nuclear']//input[@class='qty']"));
         assertThat(productsInCart).hasSize(2);
         return this;
     }
 
+    @Step("Оформление заказа в корзине")
     public CartPage makeOrder() {
         webDriver.findElement(By.xpath("//input[@name='BasketOrder']")).click();
         return this;
     }
 
+    @Step("Оформление заказа")
     public CartPage buyOrder() {
         webDriver.findElement(By.xpath("//input[@name='submitbutton']")).click();
         return this;
     }
 
+    @Step("Проверка оформления заказа без заполненных данных")
     public CartPage checkOrderWithoutData() {
         new WebDriverWait(webDriver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//font[@class='errortext']")));
         return this;

@@ -8,7 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AuthGausNegative extends BaseTest{
+public class AuthGausNegativeTest extends BaseTest{
+
     @Test
     @DisplayName("Негативный тест - некорректный логин или пароль")
     void failedAuthTest() throws InterruptedException {

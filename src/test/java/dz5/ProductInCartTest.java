@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProductInCart extends BaseTest{
+public class ProductInCartTest extends BaseTest{
 
     @ParameterizedTest
     @DisplayName("Корректное отображение в корзине выбранного товара")

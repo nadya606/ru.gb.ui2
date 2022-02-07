@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
-public class AuthGausPositive extends BaseTest{
+public class AuthGausPositiveTest extends BaseTest{
 
     @Test
     @DisplayName("Позитивный тест - верный логин и пароль")

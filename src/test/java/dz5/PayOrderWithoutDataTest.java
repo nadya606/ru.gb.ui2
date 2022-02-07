@@ -7,7 +7,7 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PayOrderWithoutData extends BaseTest {
+public class PayOrderWithoutDataTest extends BaseTest {
     @Test
     @DisplayName("Тест на попытку оформить заказ без заполнения обязательных полей")
     void filterPriceTest() {

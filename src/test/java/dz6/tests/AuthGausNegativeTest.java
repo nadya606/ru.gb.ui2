@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class AuthGausNegative extends BaseTest {
+public class AuthGausNegativeTest extends BaseTest {
     String login = "inv";
     String password = "invalid_password";
     private static final String URL = "https://gauss-online.ru/";

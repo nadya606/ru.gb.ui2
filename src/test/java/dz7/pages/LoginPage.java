@@ -1,5 +1,6 @@
 package dz7.pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,6 +22,7 @@ public class LoginPage extends BasePage {
         super(webDriver);
     }
 
+    @Step("Ввод логина и пароля")
     public MainPage login(String login, String password) {
         By authFormLocator = By.xpath("//form[contains(@name,'form_auth')]");
         new WebDriverWait(webDriver, 10).until(ExpectedConditions.presenceOfElementLocated(authFormLocator));
@@ -31,6 +33,7 @@ public class LoginPage extends BasePage {
         return new MainPage(webDriver);
     }
 
+    @Step("Проверка ошибки при неверном логине и пароле")
     public void checkError(String errorText) {
         //assertThat(webDriver.findElement(By.xpath("//font[@class='errortext']")).getText())
                 //.isEqualTo(errorText);

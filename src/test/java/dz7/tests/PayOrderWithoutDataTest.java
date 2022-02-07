@@ -1,19 +1,20 @@
-package dz6.tests;
+package dz7.tests;
 
 import dz5.BaseTest;
 import dz6.pages.MainPage;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class PayOrderWithoutData extends BaseTest {
+public class PayOrderWithoutDataTest extends BaseTest {
     private static final String URL = "https://gauss-online.ru/";
 
     @Test
     @DisplayName("Тест на попытку оформить заказ без заполнения обязательных полей")
+    @Severity(SeverityLevel.BLOCKER)
+    @Description("Тест на проверку оформления заказа без ввода данных покупателя")
     void filterPriceTest() {
         webDriver.get(URL);
 
